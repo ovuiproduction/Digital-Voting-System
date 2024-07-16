@@ -1,0 +1,259 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color:white;
+}
+h2,p,i{
+    padding:0px;
+    margin:0px;
+}
+.home-header-section{
+    margin:0px;
+    padding:0px;
+    width:100vw;
+    height:6vh;
+    background:linear-gradient(to right,rgb(2, 44, 95),rgb(11, 90, 185),rgb(31, 172, 247));
+}
+.home-header{
+    width:100%;
+    height:6vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.home-header ul{
+    width:80%;
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+.home-header-menu-block{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.home-menu-icon{
+    padding:0.8rem;
+    color: whitesmoke;
+    font-size:1.2rem;
+    border-radius:50%;
+}
+.home-menu-icon:hover{
+    background-color: rgba(2, 3, 58, 0.5);
+}
+.home-header-text{
+    color:whitesmoke;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight:600;
+    margin:0px;
+    padding:0px 0px 0px 0.3rem;
+}
+
+.election-stage-1-home-navbar-section{
+    margin:0px;
+    padding:0px;
+    width:100vw;
+    height:10vh;
+    background-color:whitesmoke;
+}
+.home-navbar{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.home-navbar ul{
+    display: flex;
+    list-style: none;
+    width:80%;
+    justify-content: space-between;
+    align-items: center;
+}
+.home-navbar-left-block{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap:1rem;
+    cursor: pointer;
+}
+.home-navbar-left-block img{
+    width:5vw;
+    height:6vh;
+    border-radius:50%;
+}
+.home-logo-text-block h3{
+    font-size:20px;
+    padding-bottom:2px;
+    margin:0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight:500;
+    color: darkblue;
+}
+.home-logo-text-block p{
+    margin:0px;
+    padding:0px;
+    font-size:14px;
+    font-style: italic;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.home-profile-block{
+    padding:0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap:1rem;
+    cursor: pointer;
+}
+.home-profile-block i{
+    font-size:1rem;
+}
+
+.election-control-name-block{
+    margin-top:1rem;
+    padding:1rem;
+}
+
+.election-control-name-input{
+    border-radius:2px;
+    background-color: whitesmoke;
+    outline:none;
+    /* width:100%; */
+    padding: 1rem;
+    border:none;
+    font-weight:550;
+    font-size:18px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.election-control-name-input:focus{
+    outline: none;
+}
+
+.election-control-discription-input{
+    font-size:14px;
+    margin-top:5px;
+    outline: none;
+    padding:0.5rem;
+    background-color: whitesmoke;
+    border: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.election-control-discription-input:focus{
+    outline: none;
+}
+
+
+.login-formdiv{
+    width:60%;
+    height:max-content;
+    margin: auto;
+    padding:1rem;
+    margin-top:10vh;
+    border-radius:5px;
+    border:1px solid rgba(156, 156, 157,0.5);
+    box-shadow:1px 5px 5px rgba(2, 3, 58, 0.5);
+}
+.login-form-block{
+    padding-top:1rem;
+    height:max-content;
+    border-radius:5px;
+    background-color: white;
+}
+.input-text-field{
+    padding:1.2rem;
+    letter-spacing:2px;
+}
+.input-block-1{
+    display: block;
+    border-bottom:2px solid rgb(2, 2, 31);
+    position: relative;
+}
+.input-voterid{
+    font-size:20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight:500;
+    padding:0px;
+    margin:0px;
+    border: none;
+    outline: none;
+    height:min-content;
+    width:100%;
+    transition: all 0.3s ease-in-out; 
+}
+.input-short-discription{
+    font-size:20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight:500;
+    padding:0px;
+    margin:0px;
+    border: none;
+    outline: none;
+    height:min-content;
+    width:100%;
+    transition: all 0.3s ease-in-out; 
+}
+.election-event-discripation{
+    font-size:20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight:500;
+    padding:0px;
+    margin:0px;
+    border:none;
+    outline: none;
+    height:min-content;
+    width:100%;
+    transition: all 0.3s ease-in-out; 
+}
+.input-voterid:focus{
+    outline: none;
+}
+.label-input-efs1-before{
+    padding:0px;
+    margin: 0px;
+    font-size:22px;
+    color: rgb(108, 107, 109);
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight:400;
+    transform: translateY(0.5rem);
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+    position:absolute;
+}
+.label-input-short-discription-before{
+    padding:0px;
+    margin: 0px;
+    font-size:22px;
+    color: rgb(108, 107, 109);
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight:400;
+    transform: translateY(1rem);
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+    position:absolute;
+}
+.label-input-efs1-after{
+    color:rgb(104, 104, 107);
+    font-size:10px;
+    transform: translateY(-1rem);
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+    font-family: sans-serif;
+}
+.efs1-sumbitbtnfield{
+    margin-top:8vh;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    background-color: aliceblue;
+    border-radius:0px 0px 10px 10px;
+}
+.efs1-submitbtn{
+    cursor: pointer;
+    font-size:20px;
+    color: aliceblue;
+    width:30%;
+    border-radius:5px;
+    padding:0.5rem;
+    background:linear-gradient(to right,rgb(2, 2, 37),rgb(2, 2, 101),rgb(30, 4, 158),rgb(97, 92, 235));
+    border: none;
+    outline: none;
+}

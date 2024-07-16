@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/630e6cad6a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>active Sessions</title>
+</head>
+<body>
+    <header class="activeSession-header">
+        <ul>
+            <li>
+                <div class="activeSession-header-Logo">
+                    <img src="./image/Election_Commission_of_India_Logo.png" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="activeSession-header-text"><h1>Election Commission Of India</h1></div>
+            </li>
+            <li>
+                <div class="activeSession-header-Logo">
+                    <img src="./image/satyamev-jayate-logo.png" alt="">
+                </div>
+            </li>
+        </ul>
+    </header>    
+    <nav class="activesession-header">
+        <ul>
+            <li>
+                <div class="activesession-header-menu-block">
+                    <i class="fa-solid fa-bars activesession-menu-icon menuBtn"></i>
+                    <h3 class="activesession-header-text menuBtn">Menu</h3>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div class="path-block">
+        <a href="">home</a>
+        <span>/</span>
+        <a href="">Active Sessions</a>
+    </div> 
+    <div class="active-sessions-main-block">
+        <h3>
+            Active Election Events
+        </h3>
+        <form class="active-sessions-form"  action="/election-session" method="post">
+            <select class="active-sessions-select" name="" id="">
+                <option value=""><div class="select-item">Please select one event and proceed</div></option>
+                <option value=""><div class="select-item">Lok Sabha 2024</div></option>
+                <option value=""><div class="select-item">Vidhana Sabha 2024</div></option>
+            </select>
+            <div class="input-text-field sumbitbtnfield">
+                <button class="submitbtn" type="submit">Submit & Proceed</button>
+            </div>
+           </form>
+    </div>
+</body>
+<script src="script.js"></script>
+</html>

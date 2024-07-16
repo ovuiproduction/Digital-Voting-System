@@ -1,0 +1,230 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+::-webkit-scrollbar{
+    height:0px;
+    width:0px;
+}
+
+/* header */
+.ballot-paper-header {
+    width: 100vw;
+    height: 12vh;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom:0.5px solid gainsboro;
+}
+
+.ballot-paper-header ul {
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ballot-paper-header ul li {
+    list-style: none;
+}
+
+.ballot-paper-header-Logo {
+    width: 8vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ballot-paper-header-Logo img {
+    width: 80%;
+    height: 90%;
+}
+
+.ballot-paper-header-text {
+    width: max-content;
+    padding: 0.5rem;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(23, 12, 85);
+    font-family: sans-serif;
+}
+
+/*  */
+.ballot-paper-nav {
+    height: max-content;
+    width: 100%;
+    overflow: hidden;
+    background-color:white;
+    /* background: linear-gradient(to right, rgb(0, 4, 48), rgb(2, 58, 126), rgb(90, 103, 241)); */
+    padding:0.4rem;
+}
+
+.ballot-paper-nav-text {
+    text-align: center;
+    color: black;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+    margin: 0px;
+    font-size:1.rem;
+    padding:0.2rem;
+}
+.ballot-paper-nav-text-p{
+    text-align: center;
+    font-family:'Times New Roman', Times, serif;
+    font-weight: 500;
+    margin: 0px;
+    font-size:18px;
+    font-style: italic;
+    padding:0px;
+}
+.outer-ballot-paper-block{
+    width:100%;
+    height:auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:white;
+    margin-bottom:5vh;
+}
+
+.main-ballot-paper-block{
+    min-width:35%;
+    height:auto;
+    background-color:rgb(249, 249, 207);
+    border:6px solid rgb(238, 195, 147);
+    border-radius:5px 5px 5px 5px;
+    display: flex;
+    align-items:start;
+    justify-content: center;
+}
+
+.ballot-paper{
+    width:100%;
+    height:auto;
+    background-color: rgb(255, 255, 222);
+}
+.ballot-paper ul{
+    margin:0px;
+    padding:0px;
+    width:100%;
+    list-style: none;
+    height:auto;
+}
+
+.ballot-paper ul li{
+    width:100%;
+    border-bottom:2px solid black;
+    display: flex;
+    justify-content: left;
+}
+.ballot-paper-entry{
+    width:70%;
+    background-color:white;
+    font-size:18px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding:1rem 0px 1rem 0px;
+}
+.ballot-srno-block{
+    width:max-content;
+    padding:1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:max-content;
+}
+.ballot-name-block{
+    min-width:50%;
+    display: flex;
+    align-items: center;
+    justify-content:left;
+    height:max-content;
+    text-align: left;
+}
+.ballot-partyName-block{
+    text-align: left;
+    width:25%;
+}
+.ballot-party-symbol{
+    width:20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:8vh;
+}
+.ballot-party-symbol img{
+    width:100%;
+    height:100%;
+}
+
+.ballot-paper-control-block{
+    width:30%;
+    background-color: rgb(253, 215, 165);
+    display: flex;
+}
+.ballot-indication-block{
+    width:30%;
+    height:auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ballot-indication-light{
+    width:65%;
+    height:5vh;
+    border-radius:50%;
+    background-color: brown;
+}
+.ballot-paper-btn-block{
+    width:70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ballot-paper-btn{
+    width:80px;
+    height:35px;
+    outline: none;
+    border:none;
+    border-radius:10%;
+    background-color:rgb(51, 51, 87);
+    cursor: pointer;
+}
+.ballot-paper-btn:hover{
+    background-color:rgb(3, 3, 104);
+}
+.ballot-indication-light.active {
+    background-color: green;
+}
+
+.sumbitbtnfield-ballot{
+    width:100%;
+    bottom:0;
+    background-color: aliceblue;
+    padding:1rem 0px 1rem 0px;
+    display: flex;
+    margin-bottom: 5vh;
+    align-items: center;
+    justify-content: center;
+}
+.submitbtn{
+    cursor: pointer;
+    font-size:20px;
+    color: aliceblue;
+    border-radius:5px;
+    width:30%;
+    background:linear-gradient(to right,rgb(2, 2, 37),rgb(2, 2, 101),rgb(30, 4, 158),rgb(97, 92, 235));
+    border: none;
+    outline: none;
+}
+
+.submitbtn:hover{
+    box-shadow:0px 0px 5px rgb(40, 28, 65);
+}

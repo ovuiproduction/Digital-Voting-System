@@ -1,0 +1,141 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+::-webkit-scrollbar{
+    height:0px;
+    width:0px;
+}
+
+/* header */
+.login-header{
+    width:100vw;
+    height:10vh;
+    background-color:whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-header ul{
+    width:90%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.login-header ul li{
+    list-style: none;
+}
+.login-header-Logo{
+    width:8vw;
+    height:10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-header-Logo img{
+    width:80%;
+    height:80%;
+}
+.login-header-text{
+    width:max-content;
+    padding:0.5rem;
+    height:8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(23, 12, 85);
+    font-family: sans-serif;
+}
+
+.conformation-outer-block{
+    width:50%;
+    height:max-content;
+    margin: auto;
+    margin-top:5%;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .3);
+    border:1px solid rgba(0, 0, 0, .3);
+    padding:1rem;
+    border-radius:5px;
+}
+
+.selected-member-block{
+    width:100%;
+    display: grid;
+    grid-template-columns:1fr 5fr 2fr 2fr;
+    grid-template-rows:1fr;
+    height:max-content;
+}
+
+.selected-member-block div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+
+.selected-member-block div h2{
+    font-size:20px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    color: rgb(13, 4, 59);
+}
+.select-member-party-symbol img{
+    width:50%;
+    height:10vh;
+}
+
+.select-icon i{
+    font-size:35px;
+    color: green;
+}
+
+.conformation-control-block{
+    width:50%;
+    margin: auto;
+    margin-top:10vh;
+    height: max-content;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.conformation-control-block button{
+    cursor: pointer;
+    font-size:20px;
+    color: aliceblue;
+    width:100%;
+    border-radius:5px;
+    background:linear-gradient(to right,rgb(2, 2, 37),rgb(2, 2, 101),rgb(30, 4, 158),rgb(97, 92, 235));
+    border: none;
+    outline: none;
+    padding:0.6rem;
+}
+
+.conformation-control-block a{
+    text-decoration: none;
+    cursor: pointer;
+    font-size:20px;
+    color: aliceblue;
+    width:40%;
+    border-radius:5px;
+    border: none;
+    outline: none;
+}
+
+.conformation-control-block a:hover{
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .3);
+}
+.conformation-control-block button:first-child:hover {
+    background: white; 
+}
+.conformation-control-block a:first-child:hover button {
+    color: red; 
+}
+
+.conformation-control-block button:last-child:hover {
+    background: white; 
+}
+
+.conformation-control-block a:last-child:hover button {
+    color: green; 
+}

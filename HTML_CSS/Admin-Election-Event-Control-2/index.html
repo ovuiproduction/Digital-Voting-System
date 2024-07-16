@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/630e6cad6a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Votor Details Form</title>
+</head>
+<body>
+    <header class="voter-details-header">
+        <ul>
+            <li>
+                <div class="voter-details-header-Logo">
+                    <img src="./image/Election_Commission_of_India_Logo.png" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="voter-details-header-text"><h1>Election Commission Of India</h1></div>
+            </li>
+            <li>
+                <div class="voter-details-header-Logo">
+                    <img src="./image/satyamev-jayate-logo.png" alt="">
+                </div>
+            </li>
+        </ul>
+    </header>    
+    <nav class="voter-details-nav">
+        <ul>
+            <li>
+                <div class="voter-details-menu-block">
+                    <i class="fa-solid fa-bars voter-details-menu-icon menuBtn"></i>
+                    <h3 class="voter-details-nav-text menuBtn">Menu</h3>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div class="voter-details-main-block">
+        <h3>
+            Loksabha Election 2024
+        </h3>
+        <form class="voter-details-form"  action="/voter-details" method="post">
+            <select class="voter-details-form-select" name="" id="">
+                <option value=""><div class="select-item">Please select State</div></option>
+                <option value=""><div class="select-item">Maharashtra</div></option>
+                <option value=""><div class="select-item">Gujarat</div></option>
+            </select>
+            <select class="voter-details-form-select" name="" id="">
+                <option value=""><div class="select-item">Please select your Assembly consituteny</div></option>
+                <option value=""><div class="select-item">Lok Sabha 2024</div></option>
+                <option value=""><div class="select-item">Vidhana Sabha 2024</div></option>
+            </select>
+            <div class="input-text-field">
+              <p class="input-date-time-header">Date & Time</p>
+              <div class="datetime-input-block">
+                  <p>Start</p>
+                  <input aria-placeholder="start time" class="input-voterid" id="loginInputVoterId" name="voterid" placeholder="" type="datetime-local">
+                  <p>End</p>
+                  <input aria-placeholder="start time" class="input-voterid" id="loginInputVoterId" name="voterid" placeholder="" type="datetime-local">
+              </div>
+          </div>
+            <div class="input-text-field sumbitbtnfield">
+                <button class="submitbtn" type="submit">Submit & Proceed</button>
+            </div>
+           </form>
+    </div>
+</body>
+<script src="script.js"></script>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script
+    src="https://kit.fontawesome.com/630e6cad6a.js"
+    crossorigin="anonymous"
+  ></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Election-Event-Control</title>
+</head>
+<body>
+    <section class="home-header-section">
+        <header class="home-header">
+          <ul>
+            <li>
+              <div class="home-header-menu-block">
+                <i class="fa-solid fa-bars home-menu-icon menuBtn"></i>
+                <h3 class="home-header-text menuBtn">Menu</h3>
+              </div>
+            </li>
+          </ul>
+        </header>
+      </section>
+      <section class="home-navbar-section">
+        <nav class="home-navbar">
+          <ul>
+            <li>
+              <div class="home-navbar-left-block">
+                <img src="./image/vote-india-logo.jpg" alt="" />
+                <div class="home-logo-text-block">
+                  <h3>Digital Voting System</h3>
+                  <p>Election Commission of India</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="home-profile-block">
+                  <i class="fa-solid fa-user"></i>
+                  <h3>Mr. Onkar</h3>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </section>
+      <div class="login-formdiv">
+        <form class="login-form-block" action="/home" method="post">
+            <div class="input-text-field">
+                <div class="input-block-1">
+                    <label id="loginLabelVoterID" class="label-input-voterid-before" for="loginInputVoterId">Name of the Project</label>
+                    <br>
+                    <input class="input-voterid" id="loginInputVoterId" name="voterid" placeholder="" type="text">
+                </div>
+            </div>
+            <div class="input-text-field">
+                <div class="input-block-1">
+                    <label id="loginLabelPassword" class="label-input-voterid-before" for="loginInputPassword">Short Description</label>
+                    <br>
+                    <input class="input-voterid" id="loginInputPassword" name="password" placeholder="" type="password">
+                </div>
+            </div>
+            <div class="input-text-field sumbitbtnfield">
+                <button class="submitbtn" type="submit">Submit & Next</button>
+            </div>
+        </form>
+      </div>
+</body>
+<script src="script.js"></script>
+</html>

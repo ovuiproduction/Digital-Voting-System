@@ -1,0 +1,264 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+::-webkit-scrollbar{
+    height:0px;
+    width:0px;
+}
+
+/* header */
+.voter-details-header {
+    width: 100vw;
+    height: 12vh;
+    background-color: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.voter-details-header ul {
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.voter-details-header ul li {
+    list-style: none;
+}
+
+.voter-details-header-Logo {
+    width: 8vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.voter-details-header-Logo img {
+    width: 80%;
+    height: 90%;
+}
+
+.voter-details-header-text {
+    width: max-content;
+    padding: 0.5rem;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(23, 12, 85);
+    font-family: sans-serif;
+}
+
+
+
+/*  */
+ .voter-details-nav {
+    height: max-content;
+    width: 100%;
+    overflow: hidden;
+    background: linear-gradient(to right, rgb(2, 44, 95), rgb(11, 90, 185), rgb(31, 172, 247));
+}
+
+.voter-details-nav ul {
+    width:80%;
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: auto;
+    padding:1rem;
+}
+
+.voter-details-menu-block {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.voter-details-menu-icon {
+    color: whitesmoke;
+    border-radius: 50%;
+}
+
+.voter-details-menu-icon:hover {
+    background-color: rgba(2, 3, 58, 0.5);
+}
+
+.voter-details-nav-text {
+    color: whitesmoke;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+    margin: 0px;
+    font-size:1rem;
+    padding: 0px 0px 0px 5px;
+}
+.main-block-voter-details{
+    width:100%;
+    height:auto;
+    display: flex;
+    margin-top:5vh;
+    padding:1rem;
+    align-items:start;
+    justify-content: space-around;
+}
+.voter-details-main-block{
+    width:50%;
+    height:auto;
+    margin-left:1rem;
+    border-radius:5px;
+    padding:1rem;
+    border: 1px solid rgba(2, 3, 58, 0.5);
+    box-shadow:1px 3px 5px rgba(2, 3, 58, 0.5);
+}
+.voter-details-main-block h3{
+    margin:0px;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight:500;
+    color: rgb(11, 1, 73);
+    background-color: aliceblue;
+    padding:1rem;
+    border-radius:5px 5px 0px 0px;
+}
+.voter-details-form{
+    width:100%;
+    height:max-content;
+    border-radius:0px 0px 5px 5px;
+    padding:1rem 1rem 1rem 0px;
+    margin-top:1rem;
+}
+.voter-details-form select{
+  cursor: pointer;
+  width:80%;
+  padding:1rem;
+  font-size:15px;
+  background-color:white;
+  border: none;
+  border-bottom:2px solid rgb(2, 2, 31);
+  outline: none;
+  margin-top:2rem;
+}
+.select-item{
+   cursor: pointer;
+}
+.voter-details-form select:focus{
+    outline: none;
+    box-shadow: 0 0 0 8px aliceblue;
+}
+.sumbitbtnfield{
+    width:80%;
+    margin-top:4rem;
+}
+.submitbtn{
+    cursor: pointer;
+    font-size:20px;
+    color: aliceblue;
+    width:30%;
+    border-radius:5px;
+    padding:0.5rem;
+    background:linear-gradient(to right,rgb(2, 2, 37),rgb(2, 2, 101),rgb(30, 4, 158),rgb(97, 92, 235));
+    border: none;
+    outline: none;
+}
+.proceed-next-btn{
+    width:90%;
+    margin-top:0rem;
+    margin:auto;
+}
+.submitbtn-proceed{
+    cursor: pointer;
+    font-size:20px;
+    color: aliceblue;
+    width:20%;
+    border-radius:5px;
+    padding:0.5rem;
+    background:linear-gradient(to right,rgb(2, 2, 37),rgb(2, 2, 101),rgb(30, 4, 158),rgb(97, 92, 235));
+    border: none;
+    outline: none;
+}
+.input-text-field{
+    padding:0px;
+}
+.input-block-1{
+    width:80%;
+    display: block;
+    border-bottom:2px solid rgb(2, 2, 31);
+    position: relative;
+}
+.input-voterid{
+    font-size:20px;
+    font-family: sans-serif;
+    font-weight:500;
+    padding:0px;
+    padding-left:1rem;
+    margin:0px;
+    border: none;
+    outline: none;
+    color: rgb(50, 52, 59);
+    height:min-content;
+    transition: all 0.3s ease-in-out; 
+}
+.input-voterid:focus{
+    outline: none;
+}
+.label-input-voterid-before{
+    padding:0px;
+    padding-left:1.3rem;
+    margin: 0px;
+    font-size:18px;
+    color:rgb(43, 41, 50);
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight:400;
+    transform: translateY(0.5rem);
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+    position:absolute;
+}
+.label-input-voterid-after{
+    color:rgb(1, 1, 48);
+    font-size:12px;
+    transform: translateY(-1rem);
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+    font-family: sans-serif;
+}
+
+.Added-candidate-outer-block{
+   width:35%;
+   height:60vh;
+   overflow-y: scroll;
+   scrollbar-width: thin;
+}
+
+.Added-candidate-outer-block ul{
+    margin:0px;
+    padding:0px;
+}
+
+.Added-candidate-outer-block ul li{
+    display: grid;
+    height:max-content;
+    grid-template-columns:0.5fr 5fr 1.5fr;
+    grid-column: auto;
+    grid-row: auto;
+    padding:0.5rem;
+    row-gap:1rem;
+    border-bottom:2px solid rgb(237, 236, 236);
+}
+.Added-candidate-outer-block ul li h1{
+    padding:0px;
+    margin: 0px;
+    font-size:18px;
+    font-weight:500;
+    font-family:Arial, Helvetica, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content:left;
+}
+
+.Added-candidate-outer-block ul li img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:60px;
+    height:60px;
+}

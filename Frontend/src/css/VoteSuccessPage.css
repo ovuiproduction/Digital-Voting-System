@@ -1,0 +1,130 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+::-webkit-scrollbar{
+    height:0px;
+    width:0px;
+}
+
+/* header */
+.login-header{
+    width:100vw;
+    height:10vh;
+    background-color:whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-header ul{
+    width:90%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.login-header ul li{
+    list-style: none;
+}
+.login-header-Logo{
+    width:8vw;
+    height:10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-header-Logo img{
+    width:80%;
+    height:80%;
+}
+.login-header-text{
+    width:max-content;
+    padding:0.5rem;
+    height:8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(23, 12, 85);
+    font-family: sans-serif;
+}
+
+.conformation-outer-block{
+    width:50%;
+    height:max-content;
+    margin: auto;
+    margin-top:5%;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .3);
+    border:1px solid rgba(0, 0, 0, .1);
+    padding:1rem;
+    border-radius:5px;
+    background-color: rgb(239, 241, 243);
+}
+
+.selected-member-block{
+    width:100%;
+    display: grid;
+    grid-template-columns:0.5fr 3fr 1fr 1fr 0.5fr;
+    grid-template-rows:1fr;
+    height:max-content;
+}
+
+.selected-member-block div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+
+.selected-member-block div h2{
+    font-size:20px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    color:rgb(90, 87, 87);
+}
+.select-member-party-symbol img{
+    width:50%;
+    height:10vh;
+}
+
+.select-icon i{
+    font-size:35px;
+    color: gray;
+}
+
+.success-header{
+    text-align: center;
+    width:80%;
+    margin:auto;
+    padding:1rem;
+    font-size:21px;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .3);
+    border:1px solid rgba(0, 0, 0, .1);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    margin-top:10vh;
+    color: green;
+}
+
+.success-footer{
+    color: rgb(1, 1, 59);
+    background: linear-gradient(to right,rgb(239, 120, 1),white,green);
+}
+
+.vote-success-goHomeBtn{
+    width:100%;
+    margin-top:5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vote-success-goHomeBtn button{
+    padding: 0.5rem;
+    border: none;
+    outline: none;
+    font-size:20px;
+    background-color: white;
+    color:gray;
+    cursor: pointer;
+}
+.vote-success-goHomeBtn button:hover{
+    color:rgb(74, 74, 74);
+}

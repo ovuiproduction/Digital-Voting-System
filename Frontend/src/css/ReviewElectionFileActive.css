@@ -1,0 +1,390 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+::-webkit-scrollbar{
+    height:0px;
+    width:0px;
+}
+
+/* header */
+.election-file-stage-4-header {
+    width: 100vw;
+    height: 12vh;
+    background-color: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.election-file-stage-4-header ul {
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.election-file-stage-4-header ul li {
+    list-style: none;
+}
+
+.election-file-stage-4-header-Logo {
+    width: 8vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.election-file-stage-4-header-Logo img {
+    width: 80%;
+    height: 90%;
+}
+
+.election-file-stage-4-header-text {
+    width: max-content;
+    padding: 0.5rem;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(23, 12, 85);
+    font-family: sans-serif;
+}
+
+/* nav */
+.election-file-stage-4-nav {
+    height: max-content;
+    width: 100%;
+    overflow: hidden;
+    background: linear-gradient(to right, rgb(2, 44, 95), rgb(11, 90, 185), rgb(31, 172, 247));
+}
+
+.election-file-stage-4-nav ul {
+    width:80%;
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: auto;
+    padding:1rem;
+}
+
+.election-file-stage-4-menu-block {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.election-file-stage-4-menu-icon {
+    color: whitesmoke;
+    border-radius: 50%;
+}
+
+.election-file-stage-4-menu-icon:hover {
+    background-color: rgba(2, 3, 58, 0.5);
+}
+
+.election-file-stage-4-nav-text {
+    color: whitesmoke;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+    margin: 0px;
+    font-size:1rem;
+    padding: 0px 0px 0px 5px;
+}
+.path-block{
+    width:80%;
+    margin: auto;
+    margin-top:1rem;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-size:14px;
+    font-weight:300;
+    font-family: Arial, Helvetica, sans-serif;
+    column-gap:0.4rem;
+}
+.path-block a{
+    text-decoration: none;
+    color:rgb(23, 2, 74);
+}
+.path-block a:hover{
+    text-decoration: underline;
+}
+.election-file-stage-4-main-block{
+    width:80%;
+    height:auto;
+    margin: auto;
+    margin-top:5vh;
+    border-radius:5px;
+}
+.election-file-title{
+    margin:0px;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight:500;
+    color: rgb(11, 1, 73);
+    background-color: aliceblue;
+    padding:1rem;
+    border-radius:5px 5px 0px 0px;
+}
+.election-file-stage-4-form{
+    width:100%;
+    height:max-content;
+    border-radius:0px 0px 5px 5px;
+    padding:1rem 1rem 1rem 0px;
+    margin-top:1rem;
+}
+.election-file-stage-4-form select{
+  cursor: pointer;
+  width:80%;
+  padding:1rem;
+  font-size:15px;
+  background-color:white;
+  border: none;
+  border-bottom:2px solid rgb(2, 2, 31);
+  outline: none;
+  margin-top:2rem;
+}
+.select-item{
+   cursor: pointer;
+}
+.election-file-stage-4-form select:focus{
+    outline: none;
+    box-shadow: 0 0 0 8px aliceblue;
+}
+.election-file-stage-4-sumbitbtnfield{
+    width:100%;
+    margin-top:5rem;
+    background-color: aliceblue;
+    padding:1rem 0px 1rem 0px;
+}
+.election-file-stage-4-submitbtn{
+    cursor: pointer;
+    font-size:20px;
+    color: aliceblue;
+    width:35%;
+    border-radius:5px;
+    margin-left:1rem;
+    padding:0.5rem;
+    background:linear-gradient(to right,rgb(2, 2, 37),rgb(2, 2, 101),rgb(30, 4, 158),rgb(97, 92, 235));
+    border: none;
+    outline: none;
+}
+
+.input-block-1{
+    width:80%;
+    display: block;
+    border-bottom:2px solid rgb(2, 2, 31);
+    position: relative;
+}
+.input-voterid{
+    font-size:20px;
+    font-family: sans-serif;
+    font-weight:500;
+    padding:0px;
+    margin:0px;
+    border: none;
+    outline: none;
+    height:min-content;
+    transition: all 0.3s ease-in-out; 
+}
+.input-voterid:focus{
+    outline: none;
+}
+.label-input-voterid-before{
+    padding:0px;
+    padding-left:1.3rem;
+    margin: 0px;
+    font-size:18px;
+    color:rgb(30, 27, 37);
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight:400;
+    transform: translateY(0.5rem);
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+    position:absolute;
+}
+.label-input-voterid-after{
+    color:rgb(1, 1, 48);
+    font-size:15px;
+    transform: translateY(-1rem);
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+    font-family: sans-serif;
+}
+
+.election-file-review-main-block{
+    margin-bottom:5vh;
+}
+.election-file-review-main-block h3{
+    font-size:15px;
+    font-weight:500;
+    font-family:sans-serif;
+}
+
+.election-file-status{
+    display: flex;
+    align-items: center;
+    justify-content:left;
+    column-gap:3rem;
+}
+.status-ele{
+    padding:0.5rem;
+    border-radius:5px;
+    cursor: pointer;
+}
+.election-file-action-status{
+    color: rgb(56, 54, 54);
+    border:1px solid gray;
+}
+.election-file-action-status:hover{
+    background-color:gray;
+    color:white;
+}
+.election-file-completion-status{
+    color: rgb(4, 4, 92);
+    border:1px solid rgb(15, 15, 169);
+}
+.election-file-completion-status:hover{
+    background-color:rgb(15, 15, 169);
+    color:white;
+}
+
+
+.election-file-discription{
+    margin-top:0.5rem;
+}
+
+.election-file-discription p{
+    font-size:14px;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(55, 55, 56);
+    font-weight:500;
+    text-align: justify;
+}
+
+.election-file-location-block{
+    display: flex;
+    align-items: center;
+    justify-content:left;
+    /* background-color:rgb(232, 233, 234); */
+    margin-top:1rem;
+    /* padding-left:1rem; */
+    border-radius:5px;
+    column-gap: 3rem;
+}
+
+.election-file-location-block span{
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight:550;
+    background-color:whitesmoke;
+}
+
+.election-file-period-block{
+    display: flex;
+    align-items: center;
+    justify-content:left;
+    margin-top:1rem;
+    border-radius:0px;
+    column-gap:4rem;
+}
+
+.election-file-period-block span{
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight:550;
+    background-color:whitesmoke;
+}
+
+
+.election-file-ballot-paper{
+    display: block;
+    margin-top:2rem;
+    width:80%;
+}
+
+.election-file-ballot-paper ul{
+    padding:0px;
+    margin:0px;
+}
+
+.election-file-ballot-paper-title{
+    font-size:16px;
+    font-weight: 500;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: aliceblue;
+    padding:1rem;
+    color: rgb(59, 59, 59);
+}
+
+.election-file-ballotEntry{
+    padding:0px 0px 0px 1rem;
+    display:grid;
+    grid-template-columns:0.5fr 4fr 1fr 0.5fr;
+    grid-column: auto;
+    align-items:center;
+    border-bottom:2px solid rgb(112, 111, 111);
+    height:70px;
+}
+.election-file-ballotEntry img{
+    width:80%;
+    height:80%;
+}
+
+.election-file-audit-block{
+    width:100%;
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    grid-column: auto;
+    margin-top:2rem;
+    column-gap:1rem;
+}
+
+
+.election-file-submit-block{
+    width:100%;
+    margin-top:8vh;
+    padding:1rem 0px 1rem 0px;
+    display: flex;
+    align-items:center;
+    justify-content:space-around;
+    background-color:white;
+    border-radius:2px;
+    box-shadow: 0px 0px 3px rgba(9, 9, 45,0.5);
+}
+.election-file-submit-btn{
+    cursor: pointer;
+    font-size:20px;
+    color:white;
+    width:25%;
+    border-radius:5px;
+    margin-left:1rem;
+    padding:0.5rem;
+    background:linear-gradient(to right,rgb(2, 2, 37),rgb(2, 2, 101),rgb(30, 4, 158),rgb(97, 92, 235));
+    border: none;
+    outline: none;
+}
+
+.election-file-edit-btn{
+    cursor: pointer;
+    font-size:18px;
+    color: rgb(63, 64, 64);
+    width:20%;
+    border:0.5px solid gray;
+    background-color: aliceblue;
+    border-radius:5px;
+    margin-left:1rem;
+    padding:0.5rem;
+}
+.election-file-edit-btn:hover{
+    background-color: rgb(106, 107, 107);
+    color: white;
+}
+
+.Edit-input-ballot{
+    padding:0.3rem;
+    border: none;
+    outline: none;
+  }
+
+  .tag-period-block{
+    margin-top:1rem;
+    color: rgb(237, 0, 0);
+  }
