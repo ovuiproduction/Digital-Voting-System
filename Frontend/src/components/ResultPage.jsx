@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function ResultPage(){
-
-    const electionFileId = "Madha-2024-844";
-
+  
     const [electionResult,setElectionResult] = useState([]);
 
     const loadElectionResult = async () => {

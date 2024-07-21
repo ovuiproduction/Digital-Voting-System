@@ -173,16 +173,16 @@ export default function HomePageUser() {
               </a>
             </li>
             <li>
-              <a href="">
+              <Link to="/election-results">
                 <div class="home-info-circle-block">
                   <div class="circle-main-block circle-4">
                     <div class="circle-block c-4">
                       <img src={voteIndiaLogo} alt="" />
                     </div>
                   </div>
-                  <p class="circle-block-text">Election</p>
+                  <p class="circle-block-text">Election Result</p>
                 </div>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

@@ -13,11 +13,21 @@ export default function ElectionFileStage4() {
 
   const [electionFile, setElectionFile] = useState("");
 
-  const adminId = location.state?.adminId;
-  const electionFileId = location.state?.electionFileId;
+  const [adminId,setAdminId] = useState("");
+  const [electionFileId,setElectionFileId] = useState("");
+ 
+  useEffect(() => {
+    if (location.state?.adminId && location.state?.electionFileId) {
+      setElectionFileId(location.state?.electionFileId);
+      setAdminId(location.state.adminId);
+    }
+  }, [location.state?.adminId,location.state?.electionFileId]);
+
 
   const handleElectionFileStage4Completion = async () => {
     try {
+      if(electionFileId && adminId){
+   
       const response = await axios.post(
         "http://localhost:5000/election-file/state-4/file-submission",
         { electionFileId: electionFileId }
@@ -27,7 +37,10 @@ export default function ElectionFileStage4() {
         navigate("/election-file/stage-5",{state:{electionFileId:electionFileId,adminId:adminId}});
       } else if (response.status == 400) {
         alert("server not responding...");
-      }
+      }    
+    }else{
+      alert("Information Missing");
+    }
     } catch (error) {
       alert("Data not saved due to some technical errors\ntry again");
     }
@@ -51,8 +64,10 @@ export default function ElectionFileStage4() {
   };
 
   useEffect(() => {
-    loadElectionFile();
-  }, []);
+    if(electionFileId){
+      loadElectionFile();
+    }
+  }, [electionFileId]);
 
   const handleElectionFileEdit = () => {};
   return (

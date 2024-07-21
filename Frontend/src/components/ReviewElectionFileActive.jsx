@@ -39,28 +39,6 @@ export default function ReviewElectionFileActive() {
   },[])
 
 
-  // const handleElectionFileActive = async () => {
-  //   if(!endDate == '' || !endTime == '')
-  //   {
-  //     try {
-  //         const response = await axios.post(
-  //           `http://localhost:5000/election-file/active/${electionFileId}`,
-  //           { electionFileId: electionFileId ,electionId:electionId,startDate:startDate,startTime:startTime,endDate:endDate,endTime:endTime}
-  //         );
-  //         if (response.status == 200) {
-  //             alert('Active Election successfully...');
-  //           console.log("Election File successfully loaded...");
-  //           navigate('/home-admin',{state:{adminId:adminId}});
-  //         } else if (response.status == 400) {
-  //           alert("server not responding...");
-  //         }
-  //       } catch (error) {
-  //         alert("Data not saved due to some technical errors\ntry again");
-  //       }
-  //   }else{
-  //     alert('fill end date and time');
-  //   }
-  // };
   const handleElectionFileActive = async () => {
     if (endDate === '' || endTime === '') {
       alert('Please fill in both end date and time.');

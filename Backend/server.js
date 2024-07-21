@@ -2,13 +2,45 @@ const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const fs = require("fs");
+const multer = require("multer");
+const path = require("path");
 
 // server creation
 const app = express();
 const port = 5000;
 app.use(cors());
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+
+const uploadDir = path.join(__dirname, "uploads");
+
+// Ensure the uploads directory exists
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
+
+// Configure multer
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, uploadDir);
+  },
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+
+const upload = multer({ storage: storage });
+
+app.use("/uploads", express.static(uploadDir));
+
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
+
+app.use(bodyParser.json({ limit: "100mb" })); // Increase the limit as needed
+app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
 
 // connecting to datbase
 try {
@@ -28,9 +60,13 @@ const ElectionFile = require("./models/ElectionFile.js");
 const PreElectionFile = require("./models/PreElectionFile.js");
 const AdminDetails = require("./models/AdminDetails.js");
 const ResultFile = require("./models/ResultFile.js");
+const AssemblyList = require("./models/AssemblyList.js");
+const PoliticalPartyList = require("./models/PoliticalPartyList.js");
 
 // Store OTPs temporarily
 const otpStore = {};
+
+// Ensure the uploads directory exists
 
 const d = new Date();
 let year = d.getFullYear();
@@ -53,7 +89,6 @@ app.post("/verify-voter", async (req, res) => {
   }
 });
 
-
 app.post("/fetch-votername", async (req, res) => {
   try {
     const { voterId } = req.body;
@@ -63,7 +98,6 @@ app.post("/fetch-votername", async (req, res) => {
     res.status(400).send({ message: "Invalid Voter" });
   }
 });
-
 
 app.post("/active-sessions", async (req, res) => {
   try {
@@ -79,16 +113,18 @@ app.post("/active-sessions", async (req, res) => {
     const allActiveElections = await ElectionFile.find({
       state: state,
       assembly: assembly,
-      status:'active'
+      status: "active",
     });
     const completedElections = await ResultFile.find({ voterId: voterId });
 
     // Create a set of completed election IDs for quick lookup
-    const completedElectionIds = new Set(completedElections.map(election => election.electionFileId));
+    const completedElectionIds = new Set(
+      completedElections.map((election) => election.electionFileId)
+    );
 
     // Filter out completed elections from the list of all active elections
     const activeNonCompletedElections = allActiveElections.filter(
-      election => !completedElectionIds.has(election.electionId)
+      (election) => !completedElectionIds.has(election.electionId)
     );
     console.log(activeNonCompletedElections);
     res.status(200).send({ data: activeNonCompletedElections });
@@ -97,9 +133,6 @@ app.post("/active-sessions", async (req, res) => {
     res.status(400).send({ message: "Invalid Admin" });
   }
 });
-
-
-
 
 app.post("/fetch-ballot-entry", async (req, res) => {
   try {
@@ -115,6 +148,7 @@ app.post("/fetch-ballot-entry", async (req, res) => {
 app.post("/vote/:voterId/:electionFileId", async (req, res) => {
   try {
     const {
+      electionType,
       state,
       assembly,
       voterId,
@@ -123,7 +157,22 @@ app.post("/vote/:voterId/:electionFileId", async (req, res) => {
       electedCandidateName,
       electedCandidateParty,
     } = req.body;
+
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const dateOfAction = `${day}:${month}:${year}`;
+
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    // Format hours and minutes to always have two digits
+    const formattedHours = String(hours).padStart(2, "0");
+    const formattedMinutes = String(minutes).padStart(2, "0");
+    const timeOfAction = `${formattedHours}:${formattedMinutes}`;
+
     const resultFile = new ResultFile({
+      electionType,
       state,
       assembly,
       voterId,
@@ -131,6 +180,9 @@ app.post("/vote/:voterId/:electionFileId", async (req, res) => {
       electedCandidateId,
       electedCandidateName,
       electedCandidateParty,
+      year,
+      dateOfAction,
+      timeOfAction,
     });
     const result = await resultFile.save();
     res.status(200).send({ data: result });
@@ -146,7 +198,7 @@ app.post("/verify-admin", async (req, res) => {
     let result = await AdminDetails.findOne({ adminId: adminId });
     loggerAssembly = result.adminAssembly;
     loggerAdminId = result.adminId;
-    res.status(200).send({ data: result});
+    res.status(200).send({ data: result });
   } catch (error) {
     res.status(400).send({ message: "Invalid Admin" });
   }
@@ -186,8 +238,8 @@ app.post("/verify-otp", (req, res) => {
 
 app.post("/home-electionFileList", async (req, res) => {
   try {
-    const {adminId} = req.body;
-    const result = await PreElectionFile.find({ adminId: adminId});
+    const { adminId } = req.body;
+    const result = await PreElectionFile.find({ adminId: adminId });
     console.log(result);
     return res
       .status(200)
@@ -197,21 +249,40 @@ app.post("/home-electionFileList", async (req, res) => {
   }
 });
 
-
-app.post('/election-file/active/:electionFileId', async (req, res) => {
+app.post("/election-file/active/:electionFileId", async (req, res) => {
   try {
-   
-    const { electionFileId,electionId,startDate,startTime,endDate,endTime } = req.body;
-    
+    const {
+      electionFileId,
+      electionId,
+      startDate,
+      startTime,
+      endDate,
+      endTime,
+    } = req.body;
+
     const result = await PreElectionFile.findByIdAndUpdate(
-      { _id : electionFileId },
-      { status: "active", startDate:startDate,startTime:startTime,endDate:endDate,endTime:endTime},
+      { _id: electionFileId },
+      {
+        status: "active",
+        startDate: startDate,
+        startTime: startTime,
+        endDate: endDate,
+        endTime: endTime,
+      },
       { new: true }
     );
-  
+
     const resultActive = await ElectionFile.findOneAndUpdate(
-      {electionId : electionId },
-      {$set:{ status: "active",startDate:startDate,startTime:startTime,endDate:endDate,endTime:endTime }},
+      { electionId: electionId },
+      {
+        $set: {
+          status: "active",
+          startDate: startDate,
+          startTime: startTime,
+          endDate: endDate,
+          endTime: endTime,
+        },
+      },
       { new: true }
     );
 
@@ -220,43 +291,112 @@ app.post('/election-file/active/:electionFileId', async (req, res) => {
     }
 
     console.log(result);
-    return res.status(200).send({ message: "Data updated successfully", data: result });
+    return res
+      .status(200)
+      .send({ message: "Data updated successfully", data: result });
   } catch (error) {
     console.error(error);
     return res.status(400).send({ message: "Data updating failure" });
   }
 });
 
-app.post('/election-file/edit/:electionFileId',async(req,res)=>{
+app.post("/election-file/edit", async (req, res) => {
   try {
-    const { electionFileId,electionId,title,description,state,assembly,startDate,startTime,endDate,endTime,ballotPaper} = req.body;
+    const {
+      eventCreationStatus,
+      electionFileId,
+      electionId,
+      type,
+      description,
+      state,
+      assembly,
+      startDate,
+      startTime,
+      endDate,
+      endTime,
+      ballotPaper,
+      adminId,
+    } = req.body;
+
     const result = await PreElectionFile.findByIdAndUpdate(
-      { _id : electionFileId },
-      { title,description,state,assembly,startDate,startTime,endDate,endTime,ballotPaper },
-      { new: true }
-    );
-  
-    const resultActive = await ElectionFile.findOneAndUpdate(
-      {electionId : electionId },
-      {$set:{ title,description,state,assembly,startDate,startTime,endDate,endTime,ballotPaper }},
+      { _id: electionFileId },
+      {
+        type,
+        description,
+        state,
+        assembly,
+        startDate,
+        startTime,
+        endDate,
+        endTime,
+        ballotPaper,
+      },
       { new: true }
     );
 
-    if (!resultActive) {
-      return res.status(404).send({ message: "Election not found" });
+    if (eventCreationStatus == "processing") {
+      const auditLog = {
+        action: "Election file Edited",
+        userId: adminId,
+        details: "Election file Edited",
+      };
+      if (
+        type &&
+        description &&
+        state &&
+        assembly &&
+        startDate &&
+        startTime &&
+        endDate &&
+        endTime &&
+        ballotPaper
+      ) {
+        // Update the PreElectionFile document and push the audit log
+        const result = await PreElectionFile.findByIdAndUpdate(
+          electionFileId,
+          { eventCreationStatus: "completed", $push: { auditLogs: auditLog } }, // Ensure auditLogs is correct
+          { new: true }
+        );
+        if (!result) {
+          return res.status(404).send({ message: "Document not found" });
+        }
+        // Save the final document in the ElectionFile collection
+        const finalElectionFile = new ElectionFile(result.toObject());
+        const savingResult = await finalElectionFile.save();
+        console.log(savingResult);
+      }
+    } else if (eventCreationStatus == "completed") {
+      const resultActive = await ElectionFile.findOneAndUpdate(
+        { electionId: electionId },
+        {
+          $set: {
+            type,
+            description,
+            state,
+            assembly,
+            startDate,
+            startTime,
+            endDate,
+            endTime,
+            ballotPaper,
+          },
+        },
+        { new: true }
+      );
+      if (!resultActive) {
+        return res.status(404).send({ message: "Election not found" });
+      }
     }
-
-    console.log(resultActive);
-    return res.status(200).send({ message: "Data updated successfully", data: resultActive });
+    return res.status(200).send({ message: "Data updated successfully" });
   } catch (error) {
     console.error(error);
     return res.status(400).send({ message: "Data updating failure" });
   }
 });
 
-app.post('/fetch-admin-details',async(req,res)=>{
+app.post("/fetch-admin-details", async (req, res) => {
   try {
-    const {adminId} = req.body;
+    const { adminId } = req.body;
     const result = await AdminDetails.findOne({ adminId: adminId });
     console.log(result);
     return res
@@ -267,6 +407,16 @@ app.post('/fetch-admin-details',async(req,res)=>{
   }
 });
 
+app.post("/fetch-assembly-list", async (req, res) => {
+  try {
+    const state = req.body.state;
+    const result = await AssemblyList.findOne({ state: state });
+    console.log(result);
+    res.status(200).send({ data: result.assemblyList });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 function generateRandomThreeDigitNumber() {
   // Generate a random number between 100 and 999
@@ -277,9 +427,9 @@ app.post("/election-file/stage-1", async (req, res) => {
   try {
     const randomNumber = generateRandomThreeDigitNumber();
     let electionId = `${loggerAssembly}-${year}-${randomNumber}`;
-    const { title, description } = req.body;
+    const { type, description } = req.body;
     const electionFile = new PreElectionFile({
-      title,
+      type,
       description,
       electionId,
       adminId: "EPI1234567",
@@ -326,14 +476,29 @@ app.post("/election-file/stage-2", async (req, res) => {
   }
 });
 
+app.post("/fetch-political-patry-list", async (req, res) => {
+  try {
+    const result = await PoliticalPartyList.find({});
+    res.status(200).send({ data: result });
+  } catch (err) {
+    res.status(400).send({ msg: "internal server error" });
+  }
+});
+
 app.post("/election-file/stage-3/candidate-Add", async (req, res) => {
   try {
-    const { electionFileId, candidateName, candidateParty } = req.body;
+    const {
+      electionFileId,
+      candidateName,
+      candidatePartySymbol,
+      candidateParty,
+    } = req.body;
 
     const newCandidate = {
       srno: Date.now(), // Assuming srno is unique and auto-increment-like
       candidateName: candidateName,
       candidateParty: candidateParty,
+      candidatePartySymbol: candidatePartySymbol,
     };
 
     const result = await PreElectionFile.findByIdAndUpdate(
@@ -412,7 +577,6 @@ app.post("/election-file/state-4/file-submission", async (req, res) => {
       userId: "EPI1234567",
       details: "Election file submission",
     };
-    console.log(auditLog);
 
     // Update the PreElectionFile document and push the audit log
     const result = await PreElectionFile.findByIdAndUpdate(
@@ -499,18 +663,62 @@ app.post("/election-file/stage-5/election-invitation", async (req, res) => {
 
 // election event active
 
-
-
-// result 
-app.post('/voting/result/:electionFileId',async(req,res)=>{
-  const {electionFileId} = req.body;
-  const response = await ResultFile.find({electionFileId:electionFileId});
+// result
+app.post("/voting/result/:type", async (req, res) => {
+  const { electionType, year } = req.body;
+  const response = await ResultFile.find({
+    electionType: electionType,
+    year: year,
+  });
   console.log(response);
-  res.status(200).send({data:response});
+  res.status(200).send({ data: response });
 });
 
+
+
+
+app.post("/add-political-party", upload.single("symbol"), async (req, res) => {
+  try {
+    const { name, abbreviation, description } = req.body;
+    const symbol = req.file ? req.file.filename : "";
+    console.log(req.file);
+    const newParty = new PoliticalPartyList({
+      name,
+      abbreviation,
+      symbol: symbol,
+      description,
+    });
+    await newParty.save();
+
+    res.status(200).send("Party added successfully");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error saving party details");
+  }
+});
 
 // app run
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
+// // set assembly
+// app.get("/set-assembly-list", async (req, res) => {
+//   // try{
+//     const state = "Delhi";
+//     const assemblyList = [
+//       "Chandni Chowk",      // None
+//       "North East Delhi",   // None
+//       "East Delhi",         // None
+//       "New Delhi",          // None
+//       "North West Delhi",   // SC
+//       "West Delhi",         // None
+//       "South Delhi"         // None
+//     ];
+//   const stateAndassembly = new AssemblyList({ state, assemblyList });
+//   const result = await stateAndassembly.save();
+//   res.status(200).send("Added");
+//   // }catch(err){
+//   // res.status(404).send(err);
+//   // }
+// });

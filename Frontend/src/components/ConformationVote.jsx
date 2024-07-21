@@ -16,6 +16,8 @@ export default function ConformationVote() {
   const electedCandidateIndex = location.state?.electedCandidateIndex;
   const state = location.state?.state;
   const assembly = location.state?.assembly;
+  const electionType = location.state?.electionType;
+
   const handleVoteCancel = () => {
     navigate("/ballot-paper", {
       state: { voterId: voterId, electionFileId: electionFileId },
@@ -27,6 +29,7 @@ export default function ConformationVote() {
       const response = await axios.post(
         `http://localhost:5000/vote/${voterId}/${electionFileId}`,
         {
+          electionType:electionType,
           state: state,
           assembly: assembly,
           electionFileId: electionFileId,

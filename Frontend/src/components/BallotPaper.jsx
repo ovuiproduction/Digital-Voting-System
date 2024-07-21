@@ -10,6 +10,7 @@ export default function BallotPaper() {
   const location = useLocation();
   const electionFileId = location.state?.electionFileId;
   const voterId = location.state?.voterId;
+  const [electionType,setElectionType] = useState("");
   const [state, setState] = useState("");
   const [assembly, setAssembly] = useState("");
   const [electedCandidateId, setElectedCandidate] = useState("");
@@ -22,6 +23,7 @@ export default function BallotPaper() {
   const onSelectCandidate = () => {
     navigate("/conform-vote", {
       state: {
+        electionType:electionType,
         state: state,
         assembly: assembly,
         voterId: voterId,
@@ -47,7 +49,7 @@ export default function BallotPaper() {
             setState(electionFile.state);
             setAssembly(electionFile.assembly);
             setCandidateList(electionFile.ballotPaper);
-            console.log(candidateList);
+            setElectionType(electionFile.type);
           }
           console.log("data fetch successfully...");
         } else if (response.status === 400) {
@@ -97,7 +99,7 @@ export default function BallotPaper() {
       </header>
       <nav className="ballot-paper-nav">
         <h3 className="ballot-paper-nav-text">Lok-Shabha Election 2024</h3>
-        <p className="ballot-paper-nav-text-p">Maharashtra - Solapur</p>
+        <p className="ballot-paper-nav-text-p">{state} - {assembly}</p>
       </nav>
       <div className="outer-ballot-paper-block">
         <div className="main-ballot-paper-block">

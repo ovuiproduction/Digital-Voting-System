@@ -62,7 +62,7 @@ export default function LoginForm() {
             const response = await axios.post('http://localhost:5000/verify-otp', { voterId: voterId, otp: password });
             if (response.status === 200) {
                 alert('OTP verified successfully');
-                navigate('/home',{state:{voterId:voterId,voterName:voterName}});
+                navigate('/home-user',{state:{voterId:voterId,voterName:voterName}});
             }
         } catch (error) {
             console.error('Error verifying OTP', error);

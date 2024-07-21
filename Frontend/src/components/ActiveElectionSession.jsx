@@ -84,7 +84,7 @@ export default function ActiveElectionSession() {
             </option>
             {activeElectionsList && activeElectionsList.map((electionFile,index)=>(
               <option key={index} value={electionFile.electionId}>
-              <div class="select-item">{electionFile.title}</div>
+              <div class="select-item">{electionFile.type}</div>
             </option>
             ))}
           </select>

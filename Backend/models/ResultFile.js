@@ -7,6 +7,9 @@ const ResultFileSchema = mongoose.Schema({
         assembly:{
             type:String
         },
+        electionType:{
+            type:String
+        },
         electionFileId:{
             type:String
         },
@@ -20,6 +23,15 @@ const ResultFileSchema = mongoose.Schema({
             type:String
         },
         electedCandidateParty:{
+            type:String
+        },
+        year:{
+            type:String
+        },
+        dateOfAction:{
+            type:String
+        },
+        timeOfAction:{
             type:String
         }
 });

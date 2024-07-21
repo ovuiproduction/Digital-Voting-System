@@ -257,3 +257,32 @@ h2,p,i{
     border: none;
     outline: none;
 }
+
+.election-stage-1-voter-details-form {
+    width: 100%;
+    height: max-content;
+    border-radius: 0px 0px 5px 5px;
+    padding: 1rem 0rem 0rem 0px;
+  }
+
+  .election-stage-2-voter-details-form select {
+    cursor: pointer;
+    width: 80%;
+    padding: 1rem;
+    font-size: 15px;
+    background-color: white;
+    border: none;
+    border-bottom: 2px solid rgb(2, 2, 31);
+    outline: none;
+    margin-top: 2rem;
+  }
+
+  .election-stage-2-select-item {
+    cursor: pointer;
+  }
+  
+  .election-stage-2-voter-details-form select:focus {
+    outline: none;
+    box-shadow: 0 0 0 8px aliceblue;
+  }
+  

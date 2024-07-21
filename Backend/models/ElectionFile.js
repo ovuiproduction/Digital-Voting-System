@@ -34,7 +34,7 @@ const ElectionEventSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    title: {
+    type: {
         type: String,
         required: true
     },

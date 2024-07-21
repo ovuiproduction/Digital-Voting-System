@@ -1,52 +1,55 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../css/HomePageAdmin.css";
-
 import voteIndiaLogo from "../Assets/images/vote-india-logo.jpg";
 
 export default function HomePageAdmin() {
-
   const navigate = useNavigate();
   const location = useLocation();
 
   const [electionFiles, setElectionFiles] = useState([]);
   const [activeOptionIndex, setActiveOptionIndex] = useState(null);
+  const [adminId, setAdminId] = useState("");
+  const [adminName, setAdminName] = useState("");
 
-  const adminId = location.state?.adminId;
-  const [adminName,setAdminName] = useState('');
-
-  const fetchAdminDetails = async()=>{
+  const fetchAdminDetails = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:5000/fetch-admin-details",{adminId:adminId}
-      );
-      if (response.status === 200) {
-        const admin = response.data.data;
-        setAdminName(admin.adminName);
-        console.log("Election files listed successfully...");
-      } else if (response.status === 400) {
-        alert("Server not responding...");
+      if (adminId) {
+        const response = await axios.post(
+          "http://localhost:5000/fetch-admin-details",
+          { adminId: adminId }
+        );
+        if (response.status === 200) {
+          const admin = response.data.data;
+          setAdminName(admin.adminName);
+          console.log("Election files listed successfully...");
+        } else if (response.status === 400) {
+          alert("Server not responding...");
+        }
       }
     } catch (error) {
       alert("Data not fetched due to some technical errors\ntry again");
     }
-  }
+  };
 
   const initiateElection = () => {
-    navigate("/election-file/stage-1",{state:{adminId:adminId}});
+    navigate("/election-file/stage-1", { state: { adminId: adminId } });
   };
 
   const electionFileList = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:5000/home-electionFileList",{adminId:adminId}
-      );
-      if (response.status === 200) {
-        setElectionFiles(response.data.data);
-        console.log("Election files listed successfully...");
-      } else if (response.status === 400) {
-        alert("Server not responding...");
+      if (adminId) {
+        const response = await axios.post(
+          "http://localhost:5000/home-electionFileList",
+          { adminId: adminId }
+        );
+        if (response.status === 200) {
+          setElectionFiles(response.data.data);
+          console.log("Election files listed successfully...");
+        } else if (response.status === 400) {
+          alert("Server not responding...");
+        }
       }
     } catch (error) {
       alert("Data not fetched due to some technical errors\ntry again");
@@ -54,21 +57,29 @@ export default function HomePageAdmin() {
   };
 
   useEffect(() => {
-    electionFileList();
-    fetchAdminDetails();
-  }, []);
+    if (location.state?.adminId) {
+      setAdminId(location.state.adminId);
+    }
+  }, [location.state?.adminId]);
+
+  useEffect(() => {
+    if (adminId) {
+      electionFileList();
+      fetchAdminDetails();
+    }
+  }, [adminId]);
 
   const displayOptions = (index) => {
     setActiveOptionIndex(activeOptionIndex === index ? null : index);
   };
 
-  const navigateElectionFileActive = async (electionFileId,electionId) => {
-   navigate('/review-and-active',{state:{adminId:adminId,electionFileId:electionFileId,electionId:electionId}});
+  const navigateElectionFileActive = async (electionFileId, electionId) => {
+    navigate('/review-and-active', { state: { adminId: adminId, electionFileId: electionFileId, electionId: electionId } });
   };
 
-  const navigateElectionFileEdit = async (electionFileId,electionId) => {
-    navigate('/edit-election-file',{state:{adminId:adminId,electionFileId:electionFileId,electionId:electionId}});
-   };
+  const navigateElectionFileEdit = async (electionFileId, electionId) => {
+    navigate('/edit-election-file', { state: { adminId: adminId, electionFileId: electionFileId, electionId: electionId } });
+  };
 
   return (
     <>
@@ -183,7 +194,6 @@ export default function HomePageAdmin() {
           </button>
         </div>
       </div>
-
       <div className="control-option-block">
         <ul>
           <li>
@@ -204,8 +214,8 @@ export default function HomePageAdmin() {
         {electionFiles &&
           electionFiles.map((electionFile, index) => (
             <div key={index} className="election-tile-block">
-              <div className="election-event-tile-header election-tile-block-elediv">
-                <h2>Digital Voting System</h2>
+              <div className="election-event-tile-header">
+                <h2 className="election-event-name">{electionFile.type}   <p>{electionFile.status}</p></h2>
                 <i
                   onClick={() => displayOptions(index)}
                   className="fa-solid fa-ellipsis-vertical"
@@ -220,13 +230,13 @@ export default function HomePageAdmin() {
                   <ul>
                     <li>
                       <button onClick={() =>
-                          navigateElectionFileEdit(electionFile._id,electionFile.electionId)
-                        }>Edit</button>
+                        navigateElectionFileEdit(electionFile._id, electionFile.electionId)
+                      }>Edit</button>
                     </li>
                     <li>
                       <button
                         onClick={() =>
-                          navigateElectionFileActive(electionFile._id,electionFile.electionId)
+                          navigateElectionFileActive(electionFile._id, electionFile.electionId)
                         }
                       >
                         Active
@@ -235,12 +245,11 @@ export default function HomePageAdmin() {
                   </ul>
                 </div>
               </div>
-              <div className="election-tile-content election-tile-block-elediv">
-                <h2 className="election-event-name">{electionFile.title}</h2>
-                <p>{electionFile.eventCreationStatus}</p>
-                <p>{electionFile.status}</p>
+              <div className="election-tile-content">
+                <p className="creation-status">{electionFile.eventCreationStatus}</p>
+                <p>{electionFile.state} - {electionFile.assembly}</p>
               </div>
-              <div className="election-event-date election-tile-block-elediv">
+              <div className="election-event-date">
                 <p>Start</p>
                 <p>
                   {electionFile.startDate} T {electionFile.startTime}

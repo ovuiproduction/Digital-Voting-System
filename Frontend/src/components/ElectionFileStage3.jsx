@@ -6,22 +6,48 @@ import "../css/ElectionFileStage3.css";
 import sjLogo from "../Assets/images/satyamev-jayate-logo.png";
 import ecLogo from "../Assets/images/Election_Commission_of_India_Logo.png";
 
+
 export default function ElectionFileStage3() {
   const navigate = useNavigate();
   const location = useLocation();
-  const adminId = location.state?.adminId;
-  const electionFileId = location.state?.electionFileId;
+  const [partyList,setPartyList] = useState([]);
   const [candidateName, setCandidateName] = useState("");
   const [candidateParty, setCandidateParty] = useState("");
+  const [candidatePartySymbol, setCandidatePartySymbol] = useState("");
   const [ballotPaper, setBallotPaper] = useState([]);
+
+  const [adminId,setAdminId] = useState("");
+  const [electionFileId,setElectionFileId] = useState("");
+ 
+  useEffect(() => {
+    if (location.state?.adminId && location.state?.electionFileId) {
+      setElectionFileId(location.state?.electionFileId);
+      setAdminId(location.state.adminId);
+    }
+  }, [location.state?.adminId,location.state?.electionFileId]);
+
+  const fetchAssemblyList = async() => {
+    try{
+      const response = await axios.post('http://localhost:5000/fetch-political-patry-list');
+      if(response.status == 200){
+        setPartyList(response.data.data);
+      }else if(response.status == 400){
+        alert('server not responding...');
+      }
+    }catch(error){
+      alert('Data not fetched due to some technical errors');
+    }
+  };
+
+  useEffect(()=>{
+      fetchAssemblyList();
+  },[]);
+
 
   const [labelClass, setLabelClass] = useState(
     "election-stage-3-label-input-voterid-before"
   );
-  const customSelectWrapperRef = useRef(null);
-  const selectItemsRef = useRef(null);
-  const selectSelectedRef = useRef(null);
-
+ 
   const handleFocus = () => {
     setLabelClass("election-stage-3-label-input-voterid-after");
   };
@@ -40,12 +66,14 @@ export default function ElectionFileStage3() {
 
   const onCandidateAdd = async () => {
     try {
+      if(electionFileId && candidateName && candidateParty && candidatePartySymbol){
       const response = await axios.post(
         "http://localhost:5000/election-file/stage-3/candidate-Add",
         {
           electionFileId,
           candidateName: candidateName,
           candidateParty: candidateParty,
+          candidatePartySymbol:candidatePartySymbol
         }
       );
       if (response.status == 200) {
@@ -56,6 +84,9 @@ export default function ElectionFileStage3() {
       } else if (response.status == 400) {
         alert("server not responding...");
       }
+    }else{
+      alert("Fill all Details");
+    }
     } catch (error) {
       alert("Data not saved due to some technical errors\ntry again");
     }
@@ -79,6 +110,15 @@ export default function ElectionFileStage3() {
       alert("Data not saved due to some technical errors\ntry again");
     }
   };
+
+  useEffect(() => {
+    if (partyList && candidateParty) {
+        const party = partyList.find(party => party.abbreviation === candidateParty);
+        if (party) {
+            setCandidatePartySymbol(party.symbol);
+        }
+    }
+}, [partyList, candidateParty]);
 
   useEffect(() => {
     selectedCandidatesList();
@@ -150,9 +190,12 @@ export default function ElectionFileStage3() {
                 value={candidateParty}
                 onChange={(e) => setCandidateParty(e.target.value)}
               >
-                <option value="">Please select party</option>
-                <option value="BJP">BJP</option>
-                <option value="Congress">Congress</option>
+              <option value="">Please select party</option>
+              {partyList && 
+              partyList.map((party,index)=>(
+                <option key={index} value={party.abbreviation}>{party.abbreviation}</option>
+              ))
+              }
               </select>
             </div>
             <div className="election-stage-3-input-text-field election-stage-3-sumbitbtnfield">
@@ -173,8 +216,9 @@ export default function ElectionFileStage3() {
                 <li key={index}>
                   <h1>{index + 1}</h1>
                   <h1>{candidate.candidateName}</h1>
+                  <h1>{candidate.candidateParty}</h1>
                   <img
-                    src={sjLogo}
+                    src={`http://localhost:5000/uploads/${candidate.candidatePartySymbol}`}
                     alt={candidate.candidateName}
                   />
                 </li>

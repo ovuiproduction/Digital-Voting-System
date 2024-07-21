@@ -287,8 +287,28 @@ h2,p,i{
     text-decoration:none;
 }
 
+.election-tile-block{
+    padding: 1rem;
+}
+.election-tile-content{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:14px;
+    padding:0.5rem 0 0.5rem 0;
+}
+.election-tile-content p{
+    margin-bottom:1rem;
+    padding:.2rem;
+}
 .election-tile-block-elediv{
     padding:1rem;
+    border: 1px solid red;
+}
+.creation-status{
+    text-transform: capitalize;
+    border-radius:5px;
+    display: inline-block;
+    background-color: aliceblue;
+    border:1px solid rgb(217, 238, 254);
 }
 
 .election-tile-block{
@@ -303,14 +323,12 @@ h2,p,i{
     color:rgb(128, 128, 128);
     font-size:15px;
     position: relative;
-    /* border:1px solid red; */
 }
 
 .election-event-tile-header h2{
     font-size:14px;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight:500;
-    /* border:1px solid red; */
     padding:0px;
 }
 
@@ -328,16 +346,23 @@ h2,p,i{
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size:15px;
     font-weight:500;
+    display: flex;
+    column-gap:1rem;
+}
+
+.election-event-name p{
+    color: gray;
+    text-transform:capitalize;
 }
 
 .election-event-date{
     display: grid;
-    /* border:1px solid gray; */
     grid-template-columns:1fr 2fr;
     font-size:16px;
-    color: rgb(14, 1, 78);
-    font-family:'Times New Roman', Times, serif;
-    font-weight:500;
+    color: gray;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:14px;
+    row-gap:0.5rem;
 }
 .election-event-date p{
     padding:0.2rem;

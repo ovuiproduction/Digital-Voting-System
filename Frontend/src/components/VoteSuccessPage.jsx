@@ -14,7 +14,7 @@ export default function VoteSuccessPage() {
   const electedCandidateParty = location.state?.electedCandidateParty;
 
   const handleGoHomeBack = ()=>{
-    navigate('/home',{state:{voterId:voterId}});
+    navigate('/home-user',{state:{voterId:voterId}});
   }
 
   return (

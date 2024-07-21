@@ -16,7 +16,7 @@ export default function EditElectionFile() {
   const electionId = location.state?.electionId;
   const [addCandidateForm,setAddCandidateForm] = useState(false);
   const [electionFile, setElectionFile] = useState(null);
-  let [title, setTitle] = useState("");
+  let [type, setType] = useState("");
   let [description, setElectionDescription] = useState("");
   let [state, setElectionState] = useState("");
   let [assembly, setElectionAssembly] = useState("");
@@ -25,6 +25,8 @@ export default function EditElectionFile() {
   let [endDate, setElectionEndDate] = useState("");
   let [endTime, setElectionEndTime] = useState("");
   let [ballotPaper, setBallotPaper] = useState([]);
+  let [eventCreationStatus,setEventCreationStatus] = useState("");
+  let [status,setStatus] = useState("");
 
   const [candidateName, setCandidateName] = useState("");
   const [candidateParty, setCandidateParty] = useState("");
@@ -44,12 +46,13 @@ export default function EditElectionFile() {
   };
 
   const handleElectionFileEdit = async () => {
-    try {description
+    try {
+
       const response = await axios.post(
-        `http://localhost:5000/election-file/edit/${electionFileId}`,
+        `http://localhost:5000/election-file/edit`,
         { electionFileId: electionFileId,
           electionId: electionId,
-          title:title,
+          type:type,
           description:description,
           state:state,
           assembly:assembly,
@@ -57,7 +60,9 @@ export default function EditElectionFile() {
           startTime:startTime,
           endDate:endDate,
           endTime:endTime,
-          ballotPaper:ballotPaper
+          ballotPaper:ballotPaper,
+          eventCreationStatus:eventCreationStatus,
+          adminId:adminId
          }
       );
       if (response.status === 200) {
@@ -68,24 +73,69 @@ export default function EditElectionFile() {
         alert("server not responding...");
       }
     } catch (error) {
+      console.log(error);
       alert("Data not saved due to some technical errors\ntry again");
     }
   };
 
   const handleInputChange = (index, field, value) => {
-    const newBallotPaper = [...ballotPaper];
-    newBallotPaper[index][field] = value;
-    setBallotPaper(newBallotPaper);
+    if(status == "active"){
+      alert("Not Allow For Edit");
+    }else{
+      const newBallotPaper = [...ballotPaper];
+      newBallotPaper[index][field] = value;
+      setBallotPaper(newBallotPaper);
+    }
   };
 
   const handleRemoveCandidate = (index)=>{
+    if(status == "active"){
+      alert("Not Allow For Edit");
+    }else{
     const newBallotPaper = [...ballotPaper];
     newBallotPaper.splice(index, 1);
     setBallotPaper(newBallotPaper);
+    }
   }
 
   const handleInsertCandidate = ()=>{
+    if(status == "active"){
+      alert("Not Allow For Edit");
+    }else{
     setAddCandidateForm(true);
+    }
+  }
+
+  const handleChangeStartDate = (date)=>{
+    if(status == "active"){
+      alert("Not Allow For Edit");
+    }else{
+    setElectionStartDate(date);
+    }
+  }
+
+  const handleChangeState = (state)=>{
+    if(status == "active"){
+      alert("Not Allow For Edit");
+    }else{
+    setElectionState(state);
+    }
+  }
+
+  const handleChangeAssembly = (assembly)=>{
+    if(status == "active"){
+      alert("Not Allow For Edit");
+    }else{
+    setElectionAssembly(assembly);
+    }
+  }
+
+  const handleChangeStartTime = (time)=>{
+    if(status == "active"){
+      alert("Not Allow For Edit");
+    }else{
+    setElectionStartTime(time);
+    }
   }
 
   const handleCandidateAdd = ()=>{
@@ -133,7 +183,7 @@ export default function EditElectionFile() {
 
   useEffect(()=>{
     if (electionFile) {
-      setTitle(electionFile.title);
+      setType(electionFile.type);
       setElectionDescription(electionFile.description);
       setElectionState(electionFile.state);
       setElectionAssembly(electionFile.assembly);
@@ -142,6 +192,8 @@ export default function EditElectionFile() {
       setElectionEndDate(electionFile.endDate);
       setElectionEndTime(electionFile.endTime);
       setBallotPaper(electionFile.ballotPaper);
+      setEventCreationStatus(electionFile.eventCreationStatus);
+      setStatus(electionFile.status);
     }
   },[electionFile]);
 
@@ -178,11 +230,11 @@ export default function EditElectionFile() {
       </nav>
       {electionFile && (
         <div className="election-file-edit-main-block">
-          <div className="election-file-edit-title-block">
+          <div className="election-file-edit-type-block">
             <input
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="election-file-edit-title"
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              className="election-file-edit-type"
               type="text"
             />
           </div>
@@ -210,7 +262,7 @@ export default function EditElectionFile() {
                   <select
                     className="Edit-input"
                     value={state}
-                    onChange={(e) => setElectionState(e.target.value)}
+                    onChange={(e)=>handleChangeState(e.target.value)}
                     name=""
                     id=""
                   >
@@ -226,7 +278,7 @@ export default function EditElectionFile() {
                   <select
                     className="Edit-input"
                     value={assembly}
-                    onChange={(e) => setElectionAssembly(e.target.value)}
+                    onChange={(e) => handleChangeAssembly(e.target.value)}
                     name=""
                     id=""
                   >
@@ -243,13 +295,13 @@ export default function EditElectionFile() {
                 <input
                   className="Edit-input"
                   value={startDate}
-                  onChange={(e) => setElectionStartDate(e.target.value)}
+                  onChange={(e) => handleChangeStartDate(e.target.value)}
                   type="date"
                 />
                 <input
                   className="Edit-input"
                   value={startTime}
-                  onChange={(e) => setElectionStartTime(e.target.value)}
+                  onChange={(e) => handleChangeStartTime(e.target.value)}
                   type="time"
                 />
               </h3>
@@ -271,7 +323,7 @@ export default function EditElectionFile() {
               </h3>
             </div>
             <div className="election-file-edit-ballot-paper">
-              <h1 className="election-file-edit-ballot-paper-title">
+              <h1 className="election-file-edit-ballot-paper-type">
                 Ballot Paper <span><button onClick={handleInsertCandidate} className="edit-ballot-add-candidatebtn">Add</button></span>
               </h1>
               <ul>
@@ -307,7 +359,7 @@ export default function EditElectionFile() {
                         />
                      
                       <img
-                        src={sjLogo}
+                        src={`http://localhost:5000/uploads/${candidate.candidatePartySymbol}`}
                         alt="Party Symbol"
                       />
                       <button onClick={()=>handleRemoveCandidate(index)} className="edit-ballot-remove-candidatebtn">Remove</button>

@@ -32,7 +32,7 @@ const ProcessingElectionEventSchema = mongoose.Schema({
     adminId: {
         type: String,
     },
-    title: {
+    type: {
         type: String,
     },
     description: {

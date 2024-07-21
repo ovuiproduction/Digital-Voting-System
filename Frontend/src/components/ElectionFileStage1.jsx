@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -12,21 +12,30 @@ export default function ElectionFileStage1() {
   const [isDiscription, setIsDiscription] = useState(false);
   const voterIdRef = useRef(null);
   const discriptionRef = useRef(null);
-  const adminId = location.state?.adminId;
-  const [title, setTitle] = useState("");
+  const [adminId,setAdminId] = useState("");
+
+  const [type, setType] = useState("");
   const [description, setDescription] = useState("");
 
+  useEffect(() => {
+    if (location.state?.adminId) {
+      setAdminId(location.state.adminId);
+    }
+  }, [location.state?.adminId]);
+
   const handleElectionFileStage1Completion = async() => {
-    console.log(title);
-    console.log(description);
     try{
-      const response = await axios.post('http://localhost:5000/election-file/stage-1',{title:title,description:description});
-      if(response.status == 200){
-        const electionFileId = response.data.data;
-        alert('Data saved successfully..');
-        navigate('/election-file/stage-2',{state:{electionFileId:electionFileId,adminid:adminId}});
-      }else if(response.status == 400){
-        alert('Backend error');
+     if(type && description && adminId){
+        const response = await axios.post('http://localhost:5000/election-file/stage-1',{type:type,description:description});
+        if(response.status == 200){
+          const electionFileId = response.data.data;
+          alert('Data saved successfully..');
+          navigate('/election-file/stage-2',{state:{electionFileId:electionFileId,adminid:adminId}});
+        }else if(response.status == 400){
+          alert('Backend error');
+        }
+      }else{
+        alert("Fill all the Details");
       }
     }catch(error){
       alert('Data not saved due to some technical errors\ntry again');
@@ -70,37 +79,20 @@ export default function ElectionFileStage1() {
       </section>
       <div className="login-formdiv">
         <form
-          className="login-form-block"
-          // onSubmit={handleElectionFileStage1Completion}
+          className="election-stage-2-voter-details-form"
         >
-          <div className="input-text-field">
-            <div className="input-block-1">
-              <label
-                id="loginLabelVoterID"
-                className={
-                  isVoterIdFocused || voterIdRef.current?.value
-                    ? "label-input-efs1-after"
-                    : "label-input-efs1-before"
-                }
-                htmlFor="loginInputVoterId"
-              >
-                Name of the Project
-              </label>
-              <br />
-              <input
-                className="input-voterid"
-                id="loginInputVoterId"
-                name="title"
-                placeholder=""
-                type="text"
-                onFocus={() => setIsVoterIdFocused(true)}
-                onBlur={() => setIsVoterIdFocused(false)}
-                ref={voterIdRef}
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </div>
+          <div className="election-stage-1-custom-select-wrapper">
+            <select
+              className="election-stage-1-voter-details-form-select"
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+            >
+              <option value="">Please select election type</option>
+              <option value="Lok Sabha Elections">Lok Sabha Elections</option>
+              <option value="State Assembly Elections">State Assembly Elections</option>
+            </select>
           </div>
+
           <div className="input-text-field">
             <div className="input-block-1">
               <label

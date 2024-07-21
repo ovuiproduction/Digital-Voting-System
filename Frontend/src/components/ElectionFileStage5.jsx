@@ -14,7 +14,16 @@ export default function ElectionFileStage5(){
     const [state, setState] = useState('');
     const [assembly, setAssembly] = useState('');
 
-    const adminId = location.state?.adminId;
+    const [adminId,setAdminId] = useState("");
+    const [electionFileId,setElectionFileId] = useState("");
+   
+    useEffect(() => {
+        if (location.state?.adminId && location.state?.electionFileId) {
+          setElectionFileId(location.state?.electionFileId);
+          setAdminId(location.state.adminId);
+        }
+      }, [location.state?.adminId,location.state?.electionFileId]);
+  
 
     const handleElectionInvitation = async()=>{
         try {
